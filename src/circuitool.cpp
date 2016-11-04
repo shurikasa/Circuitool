@@ -59,9 +59,11 @@ po::parsed_options parse_args(int argc, char** argv,
 void export_circuit_to_gmsh(const std::string & filename_circuit, const std::string & filename_geo,
                           po::variables_map & options){
 
-    circuit_exporter::exporter_flags flags = 0;
+    circuit_exporter circuit(filename_circuit);
 
-    circuit_exporter exporter(filename_circuit, filename_geo, flags);
+    gmsh_exporter exporter(circuit.getAllPositions(), filename_geo, flags); // Need to adapt gmsh_exporter to take vector
+
+    exporter.export_to_wireframe();
 
     fmt::scat(std::cout, "\nConverting ", filename_circuit, " to gmsh file format ... ", filename_geo, "\n\n");
 }

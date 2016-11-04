@@ -8,7 +8,14 @@
 
 using namespace std;
 
-mat_points transform(mat_points points,Positions pos, Rotations rot){
+circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
+    reader(circuit_filename)
+{
+
+
+}
+
+mat_points transform(mat_points points, const Positions pos, const Rotations rot){
   for(int i = 0; i< points.shape[0]; i = i+1){
     Point point = point3(points[i][0],points[i][1],points[i][2])
     hadoken::geometry::rotate<double>(rotations[i],point[j]);
@@ -20,7 +27,7 @@ mat_points transform(mat_points points,Positions pos, Rotations rot){
 }
 
 
-std::vector<morpho_tree> getAllPositions(const std::string & filename){
+std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & filename){
   using namespace MVD3;
   std::string prefix = "./";
 
