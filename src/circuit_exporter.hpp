@@ -7,6 +7,7 @@
 #include <morpho/morpho_h5_v1.hpp>
 #include <morpho/morpho_tree.hpp>
 namespace morpho{
+namespace MVD3{
 
 class circuit_exporter
 {
@@ -21,6 +22,6 @@ public:
 private:
     MVD2::MVD3File file;
 };
-}
+}}
 
 #endif // CIRCUIT_EXPORTER_H
