@@ -8,6 +8,7 @@
 
 using namespace std;
 namespace morpho{
+namespace MVD3{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
     reader(circuit_filename)
@@ -31,7 +32,6 @@ morpho_tree::mat_points transform(morpho_tree::mat_points points, const Position
 
 // Obtains a vector of morpho-trees from a circuit file
 std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & filename){
-  using namespace MVD3;
   std::string prefix = "./data/";
 
   MVD3File file(filename);
@@ -60,4 +60,4 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
 
   return morpho_trees;
 }
-}
+}}
