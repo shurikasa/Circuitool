@@ -1,18 +1,10 @@
-project(circuitool)
 cmake_minimum_required(VERSION 3.2)
-
-enable_testing()
+project(circuitool)
 
 set(VERSION_MAJOR "1")
-set(VERSION_MINOR "1")
+set(VERSION_MINOR "0")
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake
-      ${PROJECT_SOURCE_DIR}/CMake/portability
-      ${PROJECT_SOURCE_DIR}/CMake/packages
-      ${PROJECT_SOURCE_DIR}/CMake/config)s
-
-
-option(CIRCUITOOL_UNIT_TESTS "Enable or disable unit tests" ON)
+include_directories("${PROJECT_BINARY_DIR}")
 
 set(Boost_NO_BOOST_CMAKE TRUE)
 SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
@@ -27,7 +19,7 @@ add_definitions( -std=c++11 )
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/highfive/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/hadoken/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/morpho-tool/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/mvd-tool/include)
 
 
 include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${HDF5_INCLUDE_DIRS})
