@@ -8,6 +8,8 @@
 
 using namespace std;
 namespace morpho{
+namespace morpho_reader{
+
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
     reader(circuit_filename)
 {
@@ -58,4 +60,4 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
 
   return morpho_trees;
 }
-}
+}}

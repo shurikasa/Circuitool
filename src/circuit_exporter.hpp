@@ -9,10 +9,10 @@
 namespace morpho{
 namespace morpho_reader{
 
-class gmsh_exporter
+class circuit_exporter
 {
 public:
-    gmsh_exporter(const std::string & circuit_filename);
+    circuit_exporter(const std::string & circuit_filename);
 
     std::vector<morpho_tree> getAllPositions(const std::string & filename);
 
