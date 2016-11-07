@@ -16,7 +16,7 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 
 // Take a matrix of points and apply the specified translation and rotation
 // to each point.
-mat_points transform(mat_points points, const MVD3::Positions pos, const MVD3::Rotations rot){
+branch::mat_points transform(branch::mat_points points, const MVD3::Positions pos, const MVD3::Rotations rot){
   for(int i = 0; i< points.shape[0]; i = i+1){
     Point point = point3(points[i][0],points[i][1],points[i][2])
     hadoken::geometry::rotate<double>(rotations[i],point[j]);
