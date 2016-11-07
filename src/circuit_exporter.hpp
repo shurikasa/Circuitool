@@ -7,6 +7,8 @@
 #include <morpho/morpho_h5_v1.hpp>
 #include <morpho/morpho_tree.hpp>
 namespace morpho{
+class morpho_reader;
+
 class gmsh_exporter
 {
 public:
