@@ -6,7 +6,7 @@
 #include <mvd/mvd3.hpp>
 #include <morpho/morpho_h5_v1.hpp>
 #include <morpho/morpho_tree.hpp>
-
+namespace morpho{
 class gmsh_exporter
 {
 public:
@@ -20,6 +20,6 @@ public:
 private:
     MVD2::MVD3File file;
 };
-
+}
 
 #endif // CIRCUIT_EXPORTER_H
