@@ -7,6 +7,7 @@
 #include <morpho/morpho_tree.hpp>
 
 using namespace std;
+namespace bg = boost::geometry;
 namespace morpho{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
@@ -18,10 +19,10 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 // to each point.
 branch::mat_points transform(branch::mat_points points,const std::size_t size, const MVD3::Positions pos, const MVD3::Rotations rot){
   for(int i = 0; i< size; i = i+1){
-    boost::geometry::model::point<double,3,boost::geometry::cs::cartesian> point(points[i][0],points[i][1],points[i][2]);
+    bg::model::point<double,3,bg::cs::cartesian> point = points.get_point(i);
     hadoken::geometry::rotate<double>(rot,point);
     for(int j=0; j < 3; ++j){
-      point[j] += pos[j];
+      bg::set<j>(point,bg::get<j>(point) + pos[j]);
     }
   }
   return points;
