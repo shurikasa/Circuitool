@@ -7,7 +7,7 @@
 #include <morpho/morpho_h5_v1.hpp>
 #include <morpho/morpho_tree.hpp>
 namespace morpho{
-class morpho_reader;
+namespace morpho_reader{
 
 class gmsh_exporter
 {
@@ -16,12 +16,12 @@ public:
 
     std::vector<morpho_tree> getAllPositions(const std::string & filename);
 
-    morpho_reader::mat_points transform(morpho_reader::mat_points points, const Positions pos, const Rotations rot);
+    mat_points transform(mat_points points, const Positions pos, const Rotations rot);
 
 
 private:
     MVD2::MVD3File file;
 };
-}
+}}
 
 #endif // CIRCUIT_EXPORTER_H
