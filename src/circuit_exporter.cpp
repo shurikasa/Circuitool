@@ -10,13 +10,13 @@ using namespace std;
 namespace morpho{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
-    MVD3File file(filename);
+    file(circuit_filename);
 {
 }
 
 // Take a matrix of points and apply the specified translation and rotation
 // to each point.
-morpho_tree::mat_points transform(morpho_tree::mat_points points, const Positions pos, const Rotations rot){
+morpho_tree::mat_points transform(morpho_tree::mat_points points, const MVD3::Positions pos, const MVD3::Rotations rot){
   for(int i = 0; i< points.shape[0]; i = i+1){
     Point point = point3(points[i][0],points[i][1],points[i][2])
     hadoken::geometry::rotate<double>(rotations[i],point[j]);
@@ -31,9 +31,8 @@ morpho_tree::mat_points transform(morpho_tree::mat_points points, const Position
 std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & filename){
   std::string prefix = "./data/";
 
-  MVD3File file(filename);
-  const Positions positions = file.getPositions();
-  const Rotations rotations = file.getRotations();
+  const MVD3::Positions positions = file.getPositions();
+  const MVD3::Rotations rotations = file.getRotations();
   const std::vector<std::string> morphologies = file.getMorphologies();
 
   assert(positions.shape[0] == rotations.shape[0] && positions.shape[0] == morphologies.size);
