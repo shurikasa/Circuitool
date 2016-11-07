@@ -20,7 +20,7 @@ public:
 
 
 private:
-    MVD2::MVD3File file;
+    MVD3File file;
 };
 }}
 
