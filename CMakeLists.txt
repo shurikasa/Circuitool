@@ -4,8 +4,6 @@ project(circuitool)
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "0")
 
-include_directories("${PROJECT_BINARY_DIR}")
-
 set(Boost_NO_BOOST_CMAKE TRUE)
 SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
 
@@ -30,13 +28,9 @@ add_executable(circuitool ${SRC_LIST} ${CIRCUI_HEADERS_BITS} ${CIRCUI_HEADERS})
 target_link_libraries(circuitool ${HDF5_C_LIBRARIES} ${Boost_FILESYSTEM_LIBRARIES}
                             ${Boost_SYSTEM_LIBRARIES} ${Boost_PROGRAM_OPTIONS_LIBRARIES})
 
-install(TARGETS circuitool RUNTIME DESTINATION ${BIN_INSTALL_DIR})
 
 #add_subdirectory(tests/unit)
 
 add_subdirectory(deps/hadoken)
 add_subdirectory(deps/highfive)
-add_subdirectory(deps/morpho-tool)
-
-
-add_subdirectory(tests/unit)
+add_subdirectory(deps/mvd-tool)

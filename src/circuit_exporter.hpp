@@ -4,18 +4,17 @@
 #include <vector>
 
 #include <mvd/mvd3.hpp>
+#include <morpho/morpho_h5_v1.hpp>
+#include <morpho/morpho_tree.hpp>
 
 class gmsh_exporter
 {
 public:
-
     gmsh_exporter(const std::string & circuit_filename);
-
 
     std::vector<morpho_tree> getAllPositions(const std::string & filename);
 
     mat_points transform(mat_points points, const Positions pos, const Rotations rot);
-
 
 
 private:
