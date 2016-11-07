@@ -10,7 +10,7 @@ using namespace std;
 namespace morpho{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
-    file(circuit_filename);
+    file(circuit_filename)
 {
 }
 
