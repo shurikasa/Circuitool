@@ -15,6 +15,8 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 
 }
 
+// Take a matrix of points and apply the specified translation and rotation
+// to each point.
 mat_points transform(mat_points points, const Positions pos, const Rotations rot){
   for(int i = 0; i< points.shape[0]; i = i+1){
     Point point = point3(points[i][0],points[i][1],points[i][2])
@@ -26,12 +28,11 @@ mat_points transform(mat_points points, const Positions pos, const Rotations rot
   return points;
 }
 
-
+// Obtains a vector of morpho-trees from a circuit file
 std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & filename){
   using namespace MVD3;
-  std::string prefix = "./";
+  std::string prefix = "./data/";
 
-  MVD3File file(filename);
   const Positions positions = file.getPositions();
   const Rotations rotations = file.getRotations();
   const std::vector<std::string> morphologies = file.getMorphologies();
