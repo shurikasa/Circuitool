@@ -8,7 +8,7 @@
 
 using namespace std;
 namespace morpho{
-namespace morpho_reader{
+namespace morpho_tree{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
     reader(circuit_filename)
@@ -35,6 +35,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
   using namespace MVD3;
   std::string prefix = "./data/";
 
+  MVD3File file(filename);
   const Positions positions = file.getPositions();
   const Rotations rotations = file.getRotations();
   const std::vector<std::string> morphologies = file.getMorphologies();
@@ -42,7 +43,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
   assert(positions.shape[0] == rotations.shape[0] && positions.shape[0] == morphologies.size);
 
   std::vector<morpho_tree> morpho_trees;
-  for (int i = 0; i < morphologies.size; i = i+1 ){
+  for (int i = 0; i < morphologies.size(); i = i+1 ){
     // Getting a morpho_tree for each morphology
     morpho_reader mread(prefix + morphologies[i]+".h5");
     morpho_tree tree = mread.create_morpho_tree();
