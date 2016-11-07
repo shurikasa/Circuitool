@@ -8,7 +8,6 @@
 
 using namespace std;
 namespace morpho{
-namespace morpho_tree{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
     reader(circuit_filename)
@@ -19,7 +18,7 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 
 // Take a matrix of points and apply the specified translation and rotation
 // to each point.
-mat_points transform(mat_points points, const Positions pos, const Rotations rot){
+morpho_tree::mat_points transform(morpho_tree::mat_points points, const Positions pos, const Rotations rot){
   for(int i = 0; i< points.shape[0]; i = i+1){
     Point point = point3(points[i][0],points[i][1],points[i][2])
     hadoken::geometry::rotate<double>(rotations[i],point[j]);
@@ -61,4 +60,4 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
 
   return morpho_trees;
 }
-}}
+}
