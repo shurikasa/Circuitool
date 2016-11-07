@@ -16,8 +16,8 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 
 // Take a matrix of points and apply the specified translation and rotation
 // to each point.
-branch::mat_points transform(branch::mat_points points, const MVD3::Positions pos, const MVD3::Rotations rot){
-  for(int i = 0; i< points.get_size(); i = i+1){
+branch::mat_points transform(branch::mat_points points,const std::size_t size, const MVD3::Positions pos, const MVD3::Rotations rot){
+  for(int i = 0; i< size; i = i+1){
     boost::geometry::concept::Point point = point3(points[i][0],points[i][1],points[i][2]);
     hadoken::geometry::rotate<double>(rot,point);
     for(int j=0; j < 3; ++j){
@@ -48,7 +48,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
       branch br = get_branch(j);
 
       // Remplace the points matrix with the transformed one.
-      br.set_points(transform(br.get_points(),positions[i],rotations[i]),br.get_distances());
+      br.set_points(transform(br.get_points(),br.get_size(),positions[i],rotations[i]),br.get_distances());
     }
 
     morpho_trees.insert(morpho_trees.end(), tree);
