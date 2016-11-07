@@ -8,13 +8,10 @@
 
 using namespace std;
 namespace morpho{
-namespace MVD3{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
-    reader(circuit_filename)
+    MVD3File file(filename);
 {
-
-
 }
 
 // Take a matrix of points and apply the specified translation and rotation
@@ -60,4 +57,4 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
 
   return morpho_trees;
 }
-}}
+}
