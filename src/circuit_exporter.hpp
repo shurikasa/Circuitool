@@ -14,7 +14,7 @@ public:
 
     std::vector<morpho_tree> getAllPositions(const std::string & filename);
 
-    mat_points transform(mat_points points, const Positions pos, const Rotations rot);
+    morpho_reader::mat_points transform(morpho_reader::mat_points points, const Positions pos, const Rotations rot);
 
 
 private:
