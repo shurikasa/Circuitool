@@ -7,7 +7,6 @@
 #include <morpho/morpho_h5_v1.hpp>
 #include <morpho/morpho_tree.hpp>
 namespace morpho{
-namespace MVD3{
 
 class circuit_exporter
 {
@@ -16,12 +15,12 @@ public:
 
     std::vector<morpho_tree> getAllPositions(const std::string & filename);
 
-    branch::mat_points transform(branch::mat_points points, const Positions pos, const Rotations rot);
+    branch::mat_points transform(branch::mat_points points, const MVD3::Positions pos, const MVD3::Rotations rot);
 
 
 private:
-    MVD3File file;
+    MVD3::MVD3File file;
 };
-}}
+}
 
 #endif // CIRCUIT_EXPORTER_H
