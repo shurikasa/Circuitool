@@ -53,7 +53,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
       branch & br = tree.get_branch(j);
 
       // Remplace the points matrix with the transformed one.
-      br.set_points(transform(br,positions[i],rotations[i]),br.get_distances());
+      br.set_points(transform(br,positions[i][1],rotations[i][1]),br.get_distances());
     }
 
     morpho_trees.insert(morpho_trees.end(), tree);
