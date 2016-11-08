@@ -18,14 +18,17 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 // Take a matrix of points and apply the specified translation and rotation
 // to each point.
 branch::mat_points transform(branch branche, const MVD3::Positions pos, const MVD3::Rotations rot){
-  for(int i = 0; i< branche.get_size(); i = i+1){
-    bg::model::point<double,3,bg::cs::cartesian> point = branche.get_point(i);
-    hadoken::geometry::rotate<double>(rot,point);
+  int rows = branche.get_points().size1();
+  branch::mat_points transformed(rows,branche.get_points().size2());
+  for(int i = 0; i< rows; i = i+1){
+    branch::point point = branche.get_point(i);
+    hadoken::geometry::rotate<double>(rot[i],point);
     for(int j=0; j < 3; ++j){
-      bg::set<j>(point,bg::get<j>(point) + pos[j]);
+      transformed.insert_element(i,j,point.get<0>()+pos[i][j]);
     }
   }
-  return points;
+
+  return transformed;
 }
 
 // Obtains a vector of morpho-trees from a circuit file
