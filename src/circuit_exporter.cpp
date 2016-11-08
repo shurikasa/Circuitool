@@ -22,7 +22,7 @@ branch::mat_points circuit_exporter::transform(branch & br, const MVD3::Position
   int rows = br.get_points().size1();
   branch::mat_points transformed(rows,br.get_points().size2());
   for(int i = 0; i< rows; i = i+1){
-    branch::point point = branche.get_point(i);
+    branch::point point = br.get_point(i);
     hg::rotate<double>(rot[i],point);
     transformed.insert_element(i,0,hg::cartesian::get_x(point)+pos[i][0]);
     transformed.insert_element(i,1,hg::cartesian::get_y(point)+pos[i][1]);
@@ -33,7 +33,7 @@ branch::mat_points circuit_exporter::transform(branch & br, const MVD3::Position
 }
 
 // Obtains a vector of morpho-trees from a circuit file
-std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & filename){
+std::vector<morpho_tree> circuit_exporter::getAllPositions(){
   std::string prefix = "./data/";
 
   const MVD3::Positions positions = file.getPositions();
