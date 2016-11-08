@@ -15,7 +15,7 @@ public:
 
     std::vector<morpho_tree> getAllPositions();
 
-    branch::mat_points transform(branch & br, const double & pos, const double & rot);
+    branch::mat_points transform(branch & br, const MVD3::Positions pos, const MVD3::Rotations rot);
 
 
 private:
