@@ -18,9 +18,9 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 
 // Take a matrix of points and apply the specified translation and rotation
 // to each point.
-branch::mat_points circuit_exporter::transform(branch & branche, const MVD3::Positions pos, const MVD3::Rotations rot){
-  int rows = branche.get_points().size1();
-  branch::mat_points transformed(rows,branche.get_points().size2());
+branch::mat_points circuit_exporter::transform(branch & br, const MVD3::Positions pos, const MVD3::Rotations rot){
+  int rows = br.get_points().size1();
+  branch::mat_points transformed(rows,br.get_points().size2());
   for(int i = 0; i< rows; i = i+1){
     branch::point point = branche.get_point(i);
     hg::rotate<double>(rot[i],point);
