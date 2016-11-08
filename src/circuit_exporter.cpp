@@ -45,7 +45,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(const std::string & f
   std::vector<morpho_tree> morpho_trees;
   for (int i = 0; i < morphologies.size(); i = i+1 ){
     // Getting a morpho_tree for each morphology
-    morpho_reader mread(prefix + morphologies[i]+".h5");
+    h5_v1::morpho_reader mread(prefix + morphologies[i]+".h5");
     morpho_tree tree = mread.create_morpho_tree();
 
     for (int j=0; j<tree.get_tree_size(); j = j + 1){
