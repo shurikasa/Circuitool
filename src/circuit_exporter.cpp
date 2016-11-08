@@ -18,7 +18,7 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 
 // Take a matrix of points and apply the specified translation and rotation
 // to each point.
-branch::mat_points circuit_exporter::transform(branch & br, const double & pos, const double & rot){
+branch::mat_points circuit_exporter::transform(branch & br, const Positions pos, const Rotations rot){
   int rows = br.get_points().size1();
   branch::mat_points transformed(rows,br.get_points().size2());
   for(int i = 0; i< rows; i = i+1){
@@ -53,7 +53,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
       branch & br = tree.get_branch(j);
 
       // Remplace the points matrix with the transformed one.
-      br.set_points(transform(br,positions[i][1],rotations[i][1]),br.get_distances());
+      br.set_points(transform(br,positions[i],rotations[i]),br.get_distances());
     }
 
     morpho_trees.insert(morpho_trees.end(), tree);
