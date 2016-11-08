@@ -8,6 +8,7 @@
 
 using namespace std;
 namespace bg = boost::geometry;
+namespace hg = hadoken::geometry;
 namespace morpho{
 
 circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
@@ -22,10 +23,10 @@ branch::mat_points transform(branch branche, const MVD3::Positions pos, const MV
   branch::mat_points transformed(rows,branche.get_points().size2());
   for(int i = 0; i< rows; i = i+1){
     branch::point point = branche.get_point(i);
-    hadoken::geometry::rotate<double>(rot[i],point);
-    for(int j=0; j < 3; ++j){
-      transformed.insert_element(i,j,point.get<0>()+pos[i][j]);
-    }
+    hg::rotate<double>(rot[i],point);
+    transformed.insert_element(i,0,hg::get_x(point)+pos[i][0]);
+    transformed.insert_element(i,1,hg::get_y(point)+pos[i][1]);
+    transformed.insert_element(i,2,hg::get_z(point)+pos[i][2]);
   }
 
   return transformed;
