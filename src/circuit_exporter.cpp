@@ -50,7 +50,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
         transformed.insert_element(k,2,hg::cartesian::get_z(point)+positions[i][2]);
       }
       branch::mat_points && _transformed = std::move(transformed);
-      vec_double &&_distances = std::move(br.get_distances());
+      branch::vec_double && _distances = std::move(br.get_distances());
       br.set_points(_transformed,_distances);
     }
 
