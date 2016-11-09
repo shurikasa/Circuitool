@@ -15,8 +15,6 @@ public:
 
     std::vector<morpho_tree> getAllPositions();
 
-    branch::mat_points transform(branch & br, const double pos[], const MVD3::Rotations rot);
-
 
 private:
     MVD3::MVD3File file;

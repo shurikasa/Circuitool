@@ -16,22 +16,6 @@ circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
 {
 }
 
-// Take a matrix of points and apply the specified translation and rotation
-// to each point.
-branch::mat_points circuit_exporter::transform(branch & br, const double pos[], const MVD3::Rotations rot){
-  int rows = br.get_points().size1();
-  branch::mat_points transformed(rows,br.get_points().size2());
-  for(int i = 0; i< rows; i = i+1){
-    branch::point point = br.get_point(i);
-    hg::rotate<double>(rot,point);
-    transformed.insert_element(i,0,hg::cartesian::get_x(point)+pos[0]);
-    transformed.insert_element(i,1,hg::cartesian::get_y(point)+pos[1]);
-    transformed.insert_element(i,2,hg::cartesian::get_z(point)+pos[2]);
-  }
-
-  return transformed;
-}
-
 // Obtains a vector of morpho-trees from a circuit file
 std::vector<morpho_tree> circuit_exporter::getAllPositions(){
   std::string prefix = "./data/";
@@ -53,8 +37,20 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
       branch & br = tree.get_branch(j);
 
       double pos[3] = {positions[i][0],positions[i][1],positions[i][2]};
+      double rot[4] = {rotations[i][0],rotations[i][1],rotations[i][2],rotations[i][3]};
       // Remplace the points matrix with the transformed one.
-      br.set_points(circuit_exporter::transform(br,pos,rotations[i]),br.get_distances());
+
+      int rows = br.get_points().size1();
+      branch::mat_points transformed(rows,br.get_points().size2());
+      for(int k = 0; k< rows; k = k+1){
+        branch::point point = br.get_point(k);
+        hg::rotate<double>(rotations[i],point);
+        transformed.insert_element(k,0,hg::cartesian::get_x(point)+positions[i][0]);
+        transformed.insert_element(k,1,hg::cartesian::get_y(point)+positions[i][1]);
+        transformed.insert_element(k,2,hg::cartesian::get_z(point)+positions[i][2]);
+      }
+
+      br.set_points(transformed,br.get_distances());
     }
 
     morpho_trees.insert(morpho_trees.end(), tree);
