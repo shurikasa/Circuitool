@@ -52,7 +52,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
       branch::mat_points _transformed = std::move(transformed);
       branch::vec_double dist = br.get_distances();
       branch::vec_double _distances = std::move(dist);
-      br.set_points(_transformed,_distances);
+      br.set_points(*_transformed,*_distances);
     }
 
     morpho_trees.insert(morpho_trees.end(), tree);
