@@ -60,6 +60,15 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
 
     circuit_exporter circuit(filename_circuit);
 
+    gmsh_exporter::exporter_flags flags = 0;
+    if(options.count("single-soma")){
+        flags |= gmsh_exporter::exporter_single_soma;
+    }
+
+    if(options.count("with-dmg")){
+        flags |= gmsh_exporter::exporter_write_dmg;
+    }
+
     gmsh_exporter exporter(circuit.getAllPositions(), filename_geo, flags); // Need to adapt gmsh_exporter to take vector
 
     exporter.export_to_wireframe();
