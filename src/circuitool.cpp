@@ -13,13 +13,10 @@
 #include "circuit_exporter.hpp"
 
 using namespace std;
+using namespace morpho;
 
 namespace fmt = hadoken::format;
 namespace po = boost::program_options;
-
-std::string version(){
-    return std::string( MORPHO_VERSION_MAJOR "." MORPHO_VERSION_MINOR );
-}
 
 po::parsed_options parse_args(int argc, char** argv,
                          po::variables_map & res,
@@ -73,11 +70,6 @@ int main(int argc, char** argv){
     std::string help_string;
     try{
         auto parsed_options = parse_args(argc, argv, options, help_string);
-
-        if(options.count("version")){
-            fmt::scat(std::cout, "version: ", version(), "\n");
-            exit(0);
-        }
 
         if(options.count("command") && options.count("subargs") ){
             std::string command = options["command"].as<std::string>();
