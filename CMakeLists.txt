@@ -18,6 +18,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/highfive/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/hadoken/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/mvd-tool/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/morpho-tool/include)
 
 
 include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${HDF5_INCLUDE_DIRS})
@@ -34,3 +35,4 @@ target_link_libraries(circuitool ${HDF5_C_LIBRARIES} ${Boost_FILESYSTEM_LIBRARIE
 add_subdirectory(deps/hadoken)
 add_subdirectory(deps/highfive)
 add_subdirectory(deps/mvd-tool)
+add_subdirectory(deps/morpho-tool)

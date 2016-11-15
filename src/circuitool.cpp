@@ -10,6 +10,8 @@
 
 #include <hadoken/format/format.hpp>
 
+#include <morpho-tool/mesh_exporter.hpp>
+
 #include "circuit_exporter.hpp"
 
 using namespace std;

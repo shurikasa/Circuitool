@@ -1,0 +1,3 @@
+[submodule "deps/morpho-tool"]
+	path = deps/morpho-tool
+	url = ssh://bbpcode.epfl.ch/hpc/morpho-tool
