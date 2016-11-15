@@ -54,7 +54,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
       br.set_points(std::move(transformed),std::move(dist));
     }
 
-    morpho_trees.push_back(tree);
+    morpho_trees.push_back(std::move(tree));
   }
 
   return morpho_trees;
