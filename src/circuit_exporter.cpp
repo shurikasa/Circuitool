@@ -44,7 +44,8 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
       branch::mat_points transformed(rows,br.get_points().size2());
       for(int k = 0; k< rows; k = k+1){
         branch::point point = br.get_point(k);
-        hg::rotate<double>(rotations[i],[hg::cartesian::get_x(point),hg::cartesian::get_y(point),hg::cartesian::get_z(point)]);
+        double point_val [3] = {hg::cartesian::get_x(point),hg::cartesian::get_y(point),hg::cartesian::get_z(point)}
+        hg::rotate<double>(rotations[i],point_val);
         transformed.insert_element(k,0,hg::cartesian::get_x(point)+positions[i][0]);
         transformed.insert_element(k,1,hg::cartesian::get_y(point)+positions[i][1]);
         transformed.insert_element(k,2,hg::cartesian::get_z(point)+positions[i][2]);
