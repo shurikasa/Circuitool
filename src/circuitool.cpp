@@ -69,7 +69,8 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
         flags |= gmsh_exporter::exporter_write_dmg;
     }
 
-    gmsh_exporter exporter(circuit.getAllPositions(), filename_geo, flags); // Need to adapt gmsh_exporter to take vector
+    std::vector<morpho_tree> morpho_trees = circuit.getAllPositions();
+    gmsh_exporter exporter(std::move(morpho_trees), filename_geo, flags);
 
     exporter.export_to_wireframe();
 
