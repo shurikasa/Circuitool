@@ -24,11 +24,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/morpho-tool/src )
 include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${HDF5_INCLUDE_DIRS})
 add_definitions( -DH5_USE_BOOST -DCIRCUI_VERSION_MAJOR=\"${VERSION_MAJOR}\" -DCIRCUI_VERSION_MINOR=\"${VERSION_MINOR}\" )
 
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src SRC_LIST)
-add_executable(circuitool ${SRC_LIST} ${CIRCUI_HEADERS_BITS} ${CIRCUI_HEADERS})
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src CIRCUIT_SRC_LIST)
+add_executable(circuitool ${CIRCUIT_SRC_LIST}  ${CMAKE_CURRENT_SOURCE_DIR}/deps/morpho-tool/src/mesh_exporter.cpp)
 target_link_libraries(circuitool ${HDF5_C_LIBRARIES} ${Boost_FILESYSTEM_LIBRARIES}
                             ${Boost_SYSTEM_LIBRARIES} ${Boost_PROGRAM_OPTIONS_LIBRARIES})
-
 
 #add_subdirectory(tests/unit)
 

@@ -61,17 +61,13 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
     circuit_exporter circuit(filename_circuit);
 
     gmsh_exporter::exporter_flags flags = 0;
-    if(options.count("single-soma")){
-        flags |= gmsh_exporter::exporter_single_soma;
-    }
-
-    if(options.count("with-dmg")){
-        flags |= gmsh_exporter::exporter_write_dmg;
-    }
-
+    flags |= gmsh_exporter::exporter_single_soma;
+    flags |= gmsh_exporter::exporter_write_dmg;
+    flags |= gmsh_exporter::exporter_bounding_box;
     std::vector<morpho_tree> morpho_trees = circuit.getAllPositions();
+    fmt::scat(std::cout, "\nCreating Exporter\n\n");
     gmsh_exporter exporter(std::move(morpho_trees), filename_geo, flags);
-
+    fmt::scat(std::cout, "\nEXPORTING\n\n");
     exporter.export_to_wireframe();
 
     fmt::scat(std::cout, "\nConverting ", filename_circuit, " to gmsh file format ... ", filename_geo, "\n\n");
@@ -79,7 +75,7 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
 
 int main(int argc, char** argv){
     po::variables_map options;
-    std::string help_string;
+/*    std::string help_string;
     try{
         auto parsed_options = parse_args(argc, argv, options, help_string);
 
@@ -102,6 +98,7 @@ int main(int argc, char** argv){
                   argv[0], "\n",
                 "Error ", e.what(), "\n");
         exit(-1);
-    }
+    }*/
+export_circuit_to_gmsh("circuit10.mvd3","results10.geo",options);
     return 0;
 }
