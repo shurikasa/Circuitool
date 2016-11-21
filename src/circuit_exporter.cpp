@@ -29,12 +29,9 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
   std::vector<morpho_tree> morpho_trees;
     fmt::scat(std::cout, "\n Size ", morphologies.size(), "\n\n");  
 for (unsigned int i = 0; i < morphologies.size(); i = i+1 ){
-    fmt::scat(std::cout, "\nOpening file numero ",i," called ", morphologies[i], "\n\n");
     // Getting a morpho_tree for each morphology
     h5_v1::morpho_reader mread(prefix + morphologies[i]+".h5");
-    fmt::scat(std::cout, "\nOpened file numero ",i," called ", morphologies[i], "\n\n");    
 morpho_tree tree = mread.create_morpho_tree();
-
     for (unsigned int j=0; j<tree.get_tree_size(); j = j + 1){
       // Getting every branch of the tree
       branch & br = tree.get_branch(j);
@@ -46,11 +43,12 @@ morpho_tree tree = mread.create_morpho_tree();
       for(unsigned int k = 0; k< rows; k = k+1){
         branch::point point = br.get_point(k);
         double point_val [3] = {hg::cartesian::get_x(point),hg::cartesian::get_y(point),hg::cartesian::get_z(point)};
-        hg::rotate<double>(rotations[i],point_val);
-        transformed.insert_element(k,0,hg::cartesian::get_x(point)+positions[i][0]);
-        transformed.insert_element(k,1,hg::cartesian::get_y(point)+positions[i][1]);
-        transformed.insert_element(k,2,hg::cartesian::get_z(point)+positions[i][2]);
-      }
+	hg::rotate<double>(rotations[i],point_val);
+        transformed.insert_element(k,0,point_val[0]+positions[i][0]);
+        transformed.insert_element(k,1,point_val[1]+positions[i][1]);
+        transformed.insert_element(k,2,point_val[2]+positions[i][2]);
+	}
+      
       branch::vec_double dist = br.get_distances();
       br.set_points(std::move(transformed),std::move(dist));
     }

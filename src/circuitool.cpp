@@ -63,7 +63,7 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
     gmsh_exporter::exporter_flags flags = 0;
     flags |= gmsh_exporter::exporter_single_soma;
     flags |= gmsh_exporter::exporter_write_dmg;
-    flags |= gmsh_exporter::exporter_bounding_box;
+    //flags |= gmsh_exporter::exporter_bounding_box;
     std::vector<morpho_tree> morpho_trees = circuit.getAllPositions();
     fmt::scat(std::cout, "\nCreating Exporter\n\n");
     gmsh_exporter exporter(std::move(morpho_trees), filename_geo, flags);
