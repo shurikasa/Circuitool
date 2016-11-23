@@ -33,9 +33,9 @@ po::parsed_options parse_args(int argc, char** argv,
                                     "Options");
     general.add_options()
         ("help", "produce a help message")
-        ("version", "output the version number");
+        ("command", po::value<std::string>(), "command to execute")
+        ("subargs", po::value<std::vector<std::string> >(), "Arguments for command");
         ;
-
     po::positional_options_description pos;
     pos.add("command", 1)
        .add("subargs", -1)
@@ -83,7 +83,7 @@ auto duration2 = duration_cast<milliseconds>( t3 - t2 ).count();
 
 int main(int argc, char** argv){
     po::variables_map options;
-/*    std::string help_string;
+    std::string help_string;
     try{
         auto parsed_options = parse_args(argc, argv, options, help_string);
 
@@ -91,10 +91,8 @@ int main(int argc, char** argv){
             std::string command = options["command"].as<std::string>();
             std::vector<std::string> subargs = po::collect_unrecognized(parsed_options.options, po::include_positional);
             if(command == "export" ){
-
-                if(subargs.size() == 4
-                    && subargs[1] == "gmsh"){
-                    export_circuit_to_gmsh(subargs[2], subargs[3], options);
+                if(subargs.size() == 3){
+                    export_circuit_to_gmsh(subargs[1], subargs[2], options);
                     return 0;
                 }
             };
@@ -106,11 +104,6 @@ int main(int argc, char** argv){
                   argv[0], "\n",
                 "Error ", e.what(), "\n");
         exit(-1);
-    }*/
-high_resolution_clock::time_point t1 = high_resolution_clock::now();
-export_circuit_to_gmsh("circuit2.mvd3","results2.geo",options);
-high_resolution_clock::time_point t2 = high_resolution_clock::now();
-auto duration = duration_cast<milliseconds>( t2 - t1 ).count();
-fmt::scat(std::cout, "\nDuration: ", duration, "\n\n===================================================");
+    }
     return 0;
 }
