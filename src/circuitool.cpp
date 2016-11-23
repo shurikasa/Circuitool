@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <chrono>
 
 #include <boost/program_options.hpp>
 #include <boost/geometry.hpp>
@@ -16,6 +17,7 @@
 
 using namespace std;
 using namespace morpho;
+using namespace std::chrono;
 
 namespace fmt = hadoken::format;
 namespace po = boost::program_options;
@@ -63,12 +65,18 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
     gmsh_exporter::exporter_flags flags = 0;
     flags |= gmsh_exporter::exporter_single_soma;
     flags |= gmsh_exporter::exporter_write_dmg;
-    //flags |= gmsh_exporter::exporter_bounding_box;
+    flags |= gmsh_exporter::exporter_bounding_box;
+   high_resolution_clock::time_point t1 = high_resolution_clock::now();
     std::vector<morpho_tree> morpho_trees = circuit.getAllPositions();
-    fmt::scat(std::cout, "\nCreating Exporter\n\n");
-    gmsh_exporter exporter(std::move(morpho_trees), filename_geo, flags);
-    fmt::scat(std::cout, "\nEXPORTING\n\n");
+   high_resolution_clock::time_point t2 = high_resolution_clock::now();
+auto duration = duration_cast<milliseconds>( t2 - t1 ).count();
+   fmt::scat(std::cout, "\nDuration: ", duration, "\n\n");    
+gmsh_exporter exporter(std::move(morpho_trees), filename_geo, flags);
+ fmt::scat(std::cout, "\nEXPORTING\n\n");
     exporter.export_to_wireframe();
+   high_resolution_clock::time_point t3 = high_resolution_clock::now();
+auto duration2 = duration_cast<milliseconds>( t3 - t2 ).count();
+   fmt::scat(std::cout, "\nDuration: ", duration2, "\n\n");
 
     fmt::scat(std::cout, "\nConverting ", filename_circuit, " to gmsh file format ... ", filename_geo, "\n\n");
 }
@@ -99,6 +107,10 @@ int main(int argc, char** argv){
                 "Error ", e.what(), "\n");
         exit(-1);
     }*/
-export_circuit_to_gmsh("circuit10.mvd3","results10.geo",options);
+high_resolution_clock::time_point t1 = high_resolution_clock::now();
+export_circuit_to_gmsh("circuit2.mvd3","results2.geo",options);
+high_resolution_clock::time_point t2 = high_resolution_clock::now();
+auto duration = duration_cast<milliseconds>( t2 - t1 ).count();
+fmt::scat(std::cout, "\nDuration: ", duration, "\n\n===================================================");
     return 0;
 }
