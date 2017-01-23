@@ -26,7 +26,7 @@ std::vector<morpho_tree> circuit_exporter::getAllPositions(){
 
 
   std::vector<morpho_tree> morpho_trees;
-    fmt::scat(std::cout, "\n Size ", morphologies.size(), "\n\n");  
+    fmt::scat(std::cout, "\n Size ", morphologies.size(), "\n");
 for (unsigned int i = 0; i < morphologies.size(); i = i+1 ){
     // Getting a morpho_tree for each morphology
     h5_v1::morpho_reader mread(prefix + morphologies[i]+".h5");
@@ -47,15 +47,14 @@ morpho_tree tree = mread.create_morpho_tree();
         transformed.insert_element(k,1,point_val[1]+positions[i][1]);
         transformed.insert_element(k,2,point_val[2]+positions[i][2]);
 	}
-      
+
       vec_double dist = br.get_distances();
       br.set_points(std::move(transformed),std::move(dist));
     }
-    fmt::scat(std::cout, "\nTreated file ",i,"\n\n");
 
     morpho_trees.push_back(std::move(tree));
   }
-    fmt::scat(std::cout, "\n FINISH TREATING \n\n");
+    fmt::scat(std::cout, "FINISH TREATING: ",morphologies.size()," Neuron(s) treated. \n\n");
   return morpho_trees;
 }
 }
