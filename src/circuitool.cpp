@@ -11,7 +11,7 @@
 
 #include <hadoken/format/format.hpp>
 
-#include <mesh_exporter.hpp>
+#include <tool/mesh_exporter.hpp>
 
 #include "circuit_exporter.hpp"
 
@@ -70,7 +70,7 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
     std::vector<morpho_tree> morpho_trees = circuit.getAllPositions();
    high_resolution_clock::time_point t2 = high_resolution_clock::now();
 auto duration = duration_cast<milliseconds>( t2 - t1 ).count();
-   fmt::scat(std::cout, "\nDuration: ", duration, "\n\n");    
+   fmt::scat(std::cout, "\nDuration: ", duration, "\n\n");
 gmsh_exporter exporter(std::move(morpho_trees), filename_geo, flags);
  fmt::scat(std::cout, "\nEXPORTING\n\n");
     exporter.export_to_wireframe();

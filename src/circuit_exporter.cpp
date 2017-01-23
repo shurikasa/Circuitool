@@ -8,7 +8,6 @@
 
 using namespace std;
 namespace bg = boost::geometry;
-namespace hg = hadoken::geometry;
 namespace fmt = hadoken::format;
 namespace morpho{
 
@@ -39,17 +38,17 @@ morpho_tree tree = mread.create_morpho_tree();
       // Remplace the points matrix with the transformed one.
 
       int rows = br.get_points().size1();
-      branch::mat_points transformed(rows,br.get_points().size2());
+      mat_points transformed(rows,br.get_points().size2());
       for(unsigned int k = 0; k< rows; k = k+1){
-        branch::point point = br.get_point(k);
-        double point_val [3] = {hg::cartesian::get_x(point),hg::cartesian::get_y(point),hg::cartesian::get_z(point)};
-	hg::rotate<double>(rotations[i],point_val);
+        point point = br.get_point(k);
+        double point_val [3] = {hadoken::geometry::cartesian::get_x(point),hadoken::geometry::cartesian::get_y(point),hadoken::geometry::cartesian::get_z(point)};
+	hadoken::geometry::rotate<double>(rotations[i],point_val);
         transformed.insert_element(k,0,point_val[0]+positions[i][0]);
         transformed.insert_element(k,1,point_val[1]+positions[i][1]);
         transformed.insert_element(k,2,point_val[2]+positions[i][2]);
 	}
       
-      branch::vec_double dist = br.get_distances();
+      vec_double dist = br.get_distances();
       br.set_points(std::move(transformed),std::move(dist));
     }
     fmt::scat(std::cout, "\nTreated file ",i,"\n\n");
