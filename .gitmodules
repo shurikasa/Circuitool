@@ -1,3 +1,6 @@
 [submodule "deps/morpho-tool"]
 	path = deps/morpho-tool
 	url = ssh://bbpcode.epfl.ch/hpc/morpho-tool
+[submodule "deps/mvd-tool"]
+	path = deps/mvd-tool
+	url = ssh://vostriak@bbpcode.epfl.ch/hpc/MVD-tool
