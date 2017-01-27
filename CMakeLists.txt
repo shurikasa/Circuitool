@@ -31,3 +31,4 @@ target_link_libraries(circuitool ${HDF5_C_LIBRARIES} ${Boost_FILESYSTEM_LIBRARIE
 
 add_subdirectory(deps/mvd-tool)
 add_subdirectory(deps/morpho-tool)
+file(COPY default.h5 DESTINATION ${CMAKE_BINARY_DIR})
