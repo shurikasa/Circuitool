@@ -56,8 +56,15 @@ po::parsed_options parse_args(int argc, char** argv,
   return opts;
 }
 
-
-
+/*  Function:     export_circuit_to_gmsh
+*   Description:  Generates a vector of morpho-trees and export it in .geo and
+*                 .dmg files.
+*   Inputs:       filename_circuit : path to the circuit .mvd3 file.
+*                 filename_geo     : path to the .geo file to create.
+*                 data_folder      : path to the data folder containing the .h5
+*                                    morphologies files
+*                 options          : any additional options.
+*/
 void export_circuit_to_gmsh(const std::string & filename_circuit, const std::string & filename_geo, const std::string & data_folder,
   po::variables_map & options){
 
@@ -93,6 +100,7 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
         std::vector<std::string> subargs = po::collect_unrecognized(parsed_options.options, po::include_positional);
         if(command == "export" ){
           if(subargs.size() == 3){
+            // Default data folder.
             export_circuit_to_gmsh(subargs[1], subargs[2],"", options);
             return 0;
           }
