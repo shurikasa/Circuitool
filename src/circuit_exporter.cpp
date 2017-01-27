@@ -11,14 +11,18 @@ namespace bg = boost::geometry;
 namespace fmt = hadoken::format;
 namespace morpho{
 
-circuit_exporter::circuit_exporter(const std::string & circuit_filename) :
-    file(circuit_filename)
+circuit_exporter::circuit_exporter(const std::string & circuit_filename, const std::string & data_folder) :
+    file(circuit_filename),
+    data_folder_name(data_folder)
 {
 }
 
 // Obtains a vector of morpho-trees from a circuit file
 std::vector<morpho_tree> circuit_exporter::getAllPositions(){
-  std::string prefix = "data/";
+  std::string prefix = data_folder_name;
+  if(prefix == ""){
+    prefix = "data/";
+  }
 
   const MVD3::Positions positions = file.getPositions();
   const MVD3::Rotations rotations = file.getRotations();
