@@ -11,7 +11,7 @@
 
 #include <hadoken/format/format.hpp>
 
-#include <tool/mesh_exporter.hpp>
+#include <morpho/gmsh_exporter.hpp>
 
 #include "circuit_exporter.hpp"
 
@@ -74,6 +74,7 @@ void export_circuit_to_gmsh(const std::string & filename_circuit, const std::str
     flags |= gmsh_exporter::exporter_single_soma;
     flags |= gmsh_exporter::exporter_write_dmg;
     flags |= gmsh_exporter::exporter_bounding_box;
+    flags |= gmsh_exporter::exporter_packed;
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
     std::vector<morpho_tree> morpho_trees = circuit.getAllPositions();
     high_resolution_clock::time_point t2 = high_resolution_clock::now();
